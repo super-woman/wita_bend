@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Database module, including the SQLAlchemy database object and DB-related utilities."""
 from datetime import datetime
-from uuid import uuid4
 
 from .extensions import db
 from .utils.handled_errors import BaseModelValidationError

@@ -2,22 +2,14 @@
 import logging
 import sys
 
-from flask import Flask, render_template
-from flask_marshmallow import Marshmallow
-from apps import commands
+from flask import Flask
 
-from apps import sample
-from apps.extensions import (
-    cache,
-    csrf_protect,
-    db,
-    debug_toolbar,
-    migrate,
-)  # noqa
-from apps.utils.auth import Auth
+from apps import commands, sample
+from apps.extensions import csrf_protect, db, debug_toolbar, migrate  # noqa
 from apps.utils.error_handlers import handle_exception
 from apps.utils.handled_errors import BaseModelValidationError
 from apps.utils.validators import json_validator
+from flask_marshmallow import Marshmallow
 
 
 def create_app(config_object="apps.settings"):
@@ -37,12 +29,11 @@ def create_app(config_object="apps.settings"):
 
 def register_extensions(app):
     """Register Flask extensions."""
-    cache.init_app(app)
     db.init_app(app)
     debug_toolbar.init_app(app)
     migrate.init_app(app, db)
 
-    ma = Marshmallow(app)
+    Marshmallow(app)
 
     return None
 
@@ -66,7 +57,7 @@ def register_shellcontext(app):
 
     def shell_context():
         """Shell context objects."""
-        return {"db": db, "User": vendor.models.Vendor}
+        return {"db": db, "Sample": sample.models.Sample}
 
     app.shell_context_processor(shell_context)
 

@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
 """Defines fixtures available to all tests."""
-
-import os
-
-import jwt
 import pytest
 from faker import Faker
-from flask import current_app
 from webtest import TestApp
 
 from apps.app import create_app
 from apps.database import db as _db
 
-from .utils import TestClient, User
+from .utils import TestClient
 
 fake = Faker()
 

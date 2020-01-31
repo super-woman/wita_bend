@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """Factories to help in tests."""
-import factory
 from factory.alchemy import SQLAlchemyModelFactory
 
 from apps.database import db

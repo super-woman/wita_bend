@@ -2,7 +2,6 @@ import logging
 import os
 import traceback
 
-import rollbar
 from flask import jsonify, make_response
 from marshmallow.exceptions import ValidationError
 from werkzeug.exceptions import HTTPException
@@ -34,6 +33,6 @@ def handle_exception(error):
     error_logger.exception(str(error))
 
     if os.getenv("APP_ENV") in ["staging", "production"]:
-        rollbar.report_exc_info()
+        error_logger.error('error is dangerous')
 
     return make_response(jsonify(response)), 500

@@ -20,7 +20,7 @@ class User:
 
     def __init__(self):
         self.first_name = fake.first_name()
-        self.id = "-LG__88sozO1OGrqda2z"
+        self.id = "124323"
         self.last_name = fake.last_name()
         self.firstName = self.first_name
         self.lastName = self.last_name
@@ -28,8 +28,8 @@ class User:
         self.name = f"{self.first_name} {self.last_name}"
         self.picture = fake.image_url(height=None, width=None)
         self.roles = {
-            "Technology": "-KXH7iME4ebMEXAEc7HP",
-            "Andelan": "-KiihfZoseQeqC6bWTau",
+            "Admin": "233242",
+            "User": "243424",
         }
 
     def to_dict(self):
@@ -50,10 +50,9 @@ class User:
         }
 
 
-def headers(location_id=1):
+def headers():
     return {
         "Content-Type": "application/json",
-        "X-Location": f"{location_id}",
         "Authorization": "Bearer {}".format(generate_token()),
     }
 
@@ -69,9 +68,9 @@ def generate_token(exp=None):
 
     secret_key = current_app.config.get("JWT_SECRET_KEY")
     payload = {
-        "UserInfo": User().to_dict(),
-        "iss": "accounts.mirest.com",
-        "aud": "mirest.com",
+        "user": User().to_dict(),
+        "iss": "accounts.wita.com",
+        "aud": "wita.com",
     }
     payload.__setitem__("exp", exp) if exp is not None else ""
 

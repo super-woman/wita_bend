@@ -13,12 +13,6 @@ jwt_errors = {
 }
 
 
-location_errors = {
-    "IS_DIGIT": "Location Header Value is Invalid",
-    "NO_LOCATION": "Location Header is Expected",
-}
-
-
 serialization_errors = {
     "INVALID_JSON": "Content-Type should be application/json"
 }

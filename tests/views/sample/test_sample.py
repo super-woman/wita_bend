@@ -2,8 +2,6 @@ import json
 
 import pytest
 
-from apps.constants.success import messages
-from apps.sample.models import Sample
 
 from ...factories import SampleFactory
 
@@ -11,7 +9,7 @@ api_version = "api/v1"
 
 
 @pytest.mark.usefixtures("db")
-class TestLocationsEndpoints:
+class TestSampleEndpoints:
     def test_get_all_samples(self, client, sample):
         response = client.get(f"{api_version}/samples")
         assert response.status_code == 200
@@ -37,13 +35,13 @@ class TestLocationsEndpoints:
         assert response.json["sample"]["name"] == sample.name
 
     def test_create_sample_with_missing_fields_fails(self, client):
-        sample = SampleFactory.build()
+        SampleFactory.build()
         sample_data = json.dumps({})
         response = client.post(f"{api_version}/samples/", data=sample_data)
         assert response.status_code == 400
 
     def test_create_sample_with_no_fields_fails(self, client):
-        sample = SampleFactory.build()
+        SampleFactory.build()
         sample_data = json.dumps({})
         response = client.post(f"{api_version}/samples/", data=sample_data)
         assert response.status_code == 400

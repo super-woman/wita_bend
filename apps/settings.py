@@ -46,8 +46,3 @@ REDIS_SOCKET_TIMEOUT = env.int("REDIS_SOCKET_TIMEOUT", default=5)
 JWT_PUBLIC_KEY = env.str("JWT_PUBLIC_KEY")
 JWT_ALGORITHM = env.str("JWT_ALGORITHM", default="HS256")
 JWT_AUTH_SCHEME = env.str("JWT_AUTH_SCHEME", default="JWT")
-
-
-# Mirest API token
-MIREST_API_TOKEN = env.str("MIREST_API_TOKEN")
-API_AUTH_URL = env.str("API_AUTH_URL")

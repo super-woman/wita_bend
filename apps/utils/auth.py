@@ -1,36 +1,22 @@
 """Module for token validation"""
 
 from base64 import b64decode
-from functools import wraps
-from os import getenv
 
 import jwt
-from flask import current_app, jsonify, make_response, request
+from flask import current_app, request
 
-from ..constants.errors import jwt_errors, location_errors
+from ..constants.errors import jwt_errors
 from .handled_errors import BaseModelValidationError
 
 
 class Auth:
     """ This class will house Authentication and Authorization Methods """
 
-    """ Routes The Location Header Should  Not Be Applied Ignore"""
-    location_header_ignore = [
-        "/locations",
-        "/docs",
-        "/apidocs",
-        "/flasgger_static",
-        "/apispec_1.json",
-        "/bot",
-    ]
-
     """ Routes The Authentication Header Should  Not Be Applied Ignore"""
     authentication_header_ignore = [
         "/docs",
         "/apidocs",
-        "/flasgger_static",
         "/apispec_1.json",
-        "/bot",
     ]
 
     @staticmethod
@@ -98,8 +84,8 @@ class Auth:
                 token,
                 public_key,
                 algorithms=["RS256"],
-                audience="mirest.com",
-                issuer="accounts.mirest.com",
+                audience="wita.com",
+                issuer="accounts.wita.com",
                 options={"verify_signature": True, "verify_exp": True},
             )
             return decoded
@@ -135,24 +121,3 @@ class Auth:
                 type(error), (jwt_errors["SERVER_ERROR_MESSAGE"], 500)
             )
             raise BaseModelValidationError(message, status_code)
-
-    @staticmethod
-    def check_location_header():
-        if request.method != "OPTIONS":
-            for endpoint in Auth.location_header_ignore:
-                # If endpoint in request.path, ignore this check
-                if request.path.find(endpoint) > -1:
-                    return None
-            try:
-                Auth.get_location()
-            except Exception as e:
-                return make_response(jsonify({"msg": str(e)}), 400)
-
-    @staticmethod
-    def get_location():
-        location = request.headers.get("X-Location", None)
-        if not location:
-            raise BaseModelValidationError(location_errors["NO_LOCATION"], 400)
-        if not location.isdigit():
-            raise BaseModelValidationError(location_errors["IS_DIGIT"], 400)
-        return int(location)

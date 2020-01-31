@@ -1,1 +1,1 @@
-from .sample import SampleFactory
+from .sample import SampleFactory # noqa

@@ -1,4 +1,3 @@
-"""Fixtures for users"""
 import pytest
 
 from ..factories import SampleFactory
