@@ -1,0 +1,24 @@
+version: "3.3"
+
+services:
+  postgres:
+    image: postgres:11-alpine
+    ports:
+      - "65432:5432"
+    environment:
+      - POSTGRES_USER=superwoman
+      - POSTGRES_DB=superwoman
+      - POSTGRES_PASSWORD=superwoman
+  redis:
+    image: redis
+    command: redis-server
+  api:
+    build: .
+    command: ./runserver.sh
+    volumes:
+      - .:/usr/apps
+    ports:
+      - "4070:4070"
+    depends_on:
+      - postgres
+      - redis

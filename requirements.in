@@ -1,0 +1,53 @@
+# Everything needed in production
+
+# Flask
+Flask
+Werkzeug
+click
+
+# Database
+Flask-SQLAlchemy
+SQLAlchemy
+psycopg2-binary
+
+
+# Migrations
+Flask-Migrate
+
+# Deployment
+gevent
+gunicorn
+
+# Auth
+cryptography
+PyJWT
+
+# Debug toolbar
+Flask-DebugToolbar
+
+# Environment variable parsing
+environs
+
+# web test
+WebTest
+
+# testing
+Pytest
+pytest-cov
+factory-boy
+
+# lint
+black 
+flake8
+
+# marshals
+flask-marshmallow
+marshmallow_sqlalchemy
+
+
+# jwt
+PyJWT
+cryptography
+
+# faker
+faker

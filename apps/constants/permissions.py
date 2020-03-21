@@ -1,0 +1,16 @@
+permissions = (
+    "view_roles",
+    "create_roles",
+    "delete_roles",
+    "view_user_roles",
+    "create_user_roles",
+    "delete_user_roles",
+    "view_permissions",
+    "create_permissions",
+    "delete_permissions",
+    "view_ratings",
+    "view_users",
+    "delete_user",
+    "create_user",
+    "update_user",
+)
